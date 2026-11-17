@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>生活费的给法 · 按月、按半月、按周还是按天给</title>
+<meta name="description" content="大学生活费按月给好还是按周给好？填一个月给多少、每天必须花多少、这个月有哪些大额开销，按「刚到手手松、快没了才紧」的花法逐天推一遍，看四种给法哪天开始缺钱、缺多少、要单独留多少备用金。">
+<style>
+  :root{--bg:#f3f1ec;--paper:#fff;--card:#f8f7f3;--ink:#22201b;--ink2:#514c42;--mut:#857f73;--line:#ddd8cd;--rule:#ebe7de;--red:#b03a2e;--ok:#2d6a4f;--key:#8a5a12;--hi:#fff3d6;--bar:#5b8c6e;--tight:#d9a441;--pay:#3b5b92}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:22px 14px 72px}
+  h1{font-size:32px;line-height:1.2;margin:0 0 6px;letter-spacing:.04em}
+  .sub{color:var(--ink2);margin:0;font-size:15.5px}
+  .muted{color:var(--mut);font-size:13.5px}
+  .hide{display:none !important}
+  button,input,select{font:inherit}
+  button{cursor:pointer}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+  .chip{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13.5px;color:var(--ink2)}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:14px 0;min-width:0}
+  .h2{font-size:15px;font-weight:700;margin:0 0 10px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .err{background:#fbeceb;border:1px solid #e3b1aa;border-radius:6px;padding:10px 14px;color:var(--red);margin:10px 0}
+  .err ul{margin:4px 0 0;padding-left:20px}
+  .bad{border-color:var(--red) !important;background:#fbeceb !important}
+  .top{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+  .top label{display:block;font-size:12.5px;color:var(--ink2);margin-bottom:3px}
+  .top input{width:100%;border:1px solid var(--line);border-radius:4px;background:#fff;padding:5px 8px;font-size:16px}
+  .top small{display:block;color:var(--mut);font-size:11.5px;line-height:1.3;margin-top:2px}
+  .evs{margin-top:14px}
+  .ev{display:grid;grid-template-columns:70px minmax(0,1fr) 110px 96px 40px;gap:8px;align-items:center;margin:6px 0}
+  .ev input{width:100%;min-width:0;border:1px solid var(--line);border-radius:4px;padding:4px 7px;font-size:15px}
+  .ev label.ck{font-size:13px;color:var(--ink2);white-space:nowrap}
+  .ev label.ck input{width:auto;vertical-align:-2px;margin-right:3px}
+  .del{border:1px solid var(--line);background:#fff;border-radius:3px;font-size:12px;padding:1px 7px;color:var(--mut)}
+  .evh{display:grid;grid-template-columns:70px minmax(0,1fr) 110px 96px 40px;gap:8px;font-size:12px;color:var(--mut)}
+  /* 四种给法 */
+  .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .tab{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:9px 10px;text-align:left;min-width:0}
+  .tab b{display:block;font-size:15px}
+  .tab span{display:block;font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+  .tab .s{font-size:22px;font-weight:800;line-height:1.3;font-variant-numeric:tabular-nums}
+  .tab .s.neg{color:var(--red)} .tab .s.pos{color:var(--ok)}
+  .tab[aria-pressed="true"]{background:var(--hi);border-color:#e3c27d;box-shadow:inset 0 0 0 1px #e3c27d}
+  .tab em{font-style:normal;font-size:11.5px;color:var(--key);font-weight:700}
+  .head{font-size:20px;font-weight:800;line-height:1.45;margin:14px 0 6px;overflow-wrap:anywhere}
+  .head.neg{color:var(--red)}
+  .why{color:var(--ink2);margin:0 0 8px;font-size:15px;overflow-wrap:anywhere}
+  .acts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+  .act{background:#fff;border:1px solid #d9c49c;color:var(--key);border-radius:6px;padding:6px 10px;font-size:14px;text-align:left;max-width:100%;overflow-wrap:anywhere}
+  .act:hover{background:var(--hi)}
+  /* 时间线 */
+  .tl{overflow-x:auto;padding-bottom:4px}
+  .tlin{display:grid;gap:2px;align-items:end;min-width:100%;position:relative}
+  .day{display:flex;flex-direction:column;align-items:stretch;min-width:0}
+  .colm{height:170px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;background:#faf9f6;border-radius:2px 2px 0 0}
+  .colm i{display:block;background:var(--bar);border-radius:2px 2px 0 0}
+  .colm i.d{background:#c7d8cc}
+  .day.tight .colm i{background:var(--tight)}
+  .day.tight .colm i:last-child{min-height:5px}
+  .day.short .colm{background:repeating-linear-gradient(135deg,#f9e0dc 0 5px,#f3d0ca 5px 10px)}
+  .day .lb{font-size:11px;text-align:center;color:var(--mut);font-variant-numeric:tabular-nums;line-height:1.3;margin-top:2px}
+  .day.pay .lb{color:var(--pay);font-weight:800}
+  .day .mk{height:18px;font-size:11px;text-align:center;line-height:18px;white-space:nowrap;overflow:visible}
+  .day .mk b{color:var(--pay)} .day .mk u{text-decoration:none;color:var(--red);font-weight:800}
+  .day .mk s{text-decoration:none;color:var(--key);font-weight:800}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--mut);margin:10px 0 0}
+  .legend i{display:inline-block;width:14px;height:14px;border-radius:2px;vertical-align:-2px;margin-right:4px}
+  .pick{margin-top:10px;background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:8px 12px;font-size:14px;color:var(--ink2);overflow-wrap:anywhere;min-height:44px}
+  table.cmp{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+  .cmp th,.cmp td{border-bottom:1px solid var(--rule);padding:6px;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .cmp th:first-child,.cmp td:first-child{text-align:left}
+  .cmp th{color:var(--mut);font-weight:600;font-size:12.5px}
+  .cmp tr.cur td{background:var(--hi);font-weight:700}
+  .cmp td.neg{color:var(--red)}
+  .tbl{overflow-x:auto}
+  .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .btn{background:var(--ink);color:#fff;border:0;border-radius:6px;padding:7px 13px;font-size:14px}
+  .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  details{margin-top:8px} summary{cursor:pointer;color:var(--ink2);font-size:14.5px}
+  details li{font-size:14px;color:var(--ink2)}
+  @media (max-width:720px){
+    .top{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+    .tabs{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+    .ev,.evh{grid-template-columns:52px minmax(0,1fr) 78px 40px}
+    .ev .del{grid-column:4;grid-row:1}
+    .ev label.ck{grid-column:2 / 5}
+    .evh span:nth-child(4),.evh span:nth-child(5){display:none}
+    .colm{height:130px}
+    .tab .s{font-size:18px}
+    .tab{padding:8px}
+    .tlin{min-width:560px}
+    h1{font-size:28px}
+    .head{font-size:18px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>生活费的给法</h1>
+  <p class="sub">同样一个月的生活费，按月、按半月、按周还是按天给？刚到手时手松、快没了才省，是很多人的花法。把这个月的钱和大额开销填进来，逐天推一遍四种给法：哪天开始缺钱、缺多少、要单独留多少备用金。</p>
+  <div class="chips" id="presets"></div>
+  <p class="muted" id="presetNote"></p>
+
+  <section class="panel" aria-label="设定">
+    <div class="h2">这个月 <span class="muted" id="saveTag"></span></div>
+    <div class="top">
+      <div><label for="total">一个月给多少（元）</label><input id="total" inputmode="decimal"><small>100–50,000</small></div>
+      <div><label for="days">这个月几天</label><input id="days" inputmode="numeric"><small>28–31</small></div>
+      <div><label for="fixed">每天必须花（元）</label><input id="fixed" inputmode="decimal"><small>吃饭、通勤这类躲不掉的</small></div>
+      <div><label for="k">刚到手时花得多快</label><input id="k" inputmode="decimal"><small>1 = 均匀花；2 = 快一倍；0.5–3</small></div>
+      <div><label for="reserve">单独留的备用金（元）</label><input id="reserve" inputmode="decimal"><small>只在缺钱那天动</small></div>
+    </div>
+    <div class="evs">
+      <div class="h2" style="margin-bottom:4px">这个月的大额开销 <span class="muted">最多 8 笔</span></div>
+      <div class="evh"><span>第几天</span><span>是什么</span><span>多少钱（元）</span><span></span><span></span></div>
+      <div id="evList"></div>
+      <div class="bar" style="margin-top:8px"><button type="button" class="btn ghost" id="addE">＋ 加一笔</button><span class="muted">勾「提前知道」：钱到手时会先把它留出来；没勾就是突然来的（修手机、看病）</span></div>
+    </div>
+  </section>
+
+  <div id="errBox" class="err hide"></div>
+
+  <section class="panel" id="okBox" aria-label="结论">
+    <div class="h2">四种给法 <span class="muted">点一个看它逐天怎么走</span></div>
+    <div class="tabs" id="tabs"></div>
+    <p class="head" id="headline"></p>
+    <p class="why" id="why"></p>
+    <div class="acts" id="acts"></div>
+  </section>
+
+  <section class="panel" id="tlPanel" aria-label="逐天">
+    <div class="h2" id="tlTitle">逐天的钱</div>
+    <div class="tl"><div class="tlin" id="tl"></div></div>
+    <div class="legend"><span><i style="background:var(--bar)"></i>当天结束还剩</span><span><i style="background:#c7d8cc"></i>当天随手花</span><span><i style="background:var(--tight)"></i>只够吃饭</span><span><i style="background:repeating-linear-gradient(135deg,#f9e0dc 0 3px,#f3d0ca 3px 6px)"></i>缺钱</span><span><b style="color:var(--pay)">¥</b> 到账</span><span><b style="color:var(--key)">●</b> 提前知道的开销</span><span><b style="color:var(--red)">!</b> 突然的开销</span></div>
+    <div class="pick" id="pick">点一天看明细。</div>
+  </section>
+
+  <section class="panel" id="cmpPanel" aria-label="对照">
+    <div class="h2">四种给法并排</div>
+    <div class="tbl"><table class="cmp" id="cmp"></table></div>
+  </section>
+
+  <section class="panel">
+    <div class="bar">
+      <button class="btn" id="dlPng" type="button">下载结果卡 PNG</button>
+      <button class="btn ghost" id="dlCsv" type="button">逐天 CSV</button>
+      <button class="btn ghost" id="dlMd" type="button">Markdown</button>
+      <button class="btn ghost" id="dlJson" type="button">备份 JSON</button>
+      <button class="btn ghost" id="impJson" type="button">导入备份</button>
+      <input type="file" id="impFile" accept=".json,application/json" class="hide">
+      <button class="btn ghost" id="reset" type="button">回到默认</button>
+    </div>
+    <details>
+      <summary>怎么算的、算不了什么</summary>
+      <ul>
+        <li>每次到账的钱按天数比例分（按半月是第 1、16 天到账；按周是第 1、8、15、22、29 天）。备用金先扣出来单独放，不进日常。</li>
+        <li>每天先付「必须花的」（每天固定开销 + 当天的大额）。不够时从备用金补，备用金也没了就记为缺口（得临时找人要或借）。</li>
+        <li>付完再随手花：先给到下次到账前每天的固定开销、和这段里「提前知道」的大额留好钱，剩下的叫富余。随手花 = 富余 × 冲动 ÷ 到下次到账还剩几天。冲动 1 是把富余平均花到每天；大于 1 是刚到手花得快，越到后面越紧。</li>
+        <li>这段之后的开销，钱还没到手，留不了；突然的开销谁都留不了。这就是不同给法差在哪里。</li>
+        <li>「花得多快」是你对自己（或孩子）的估计，是模型假设，不是测出来的；同一个人在不同给法下手松程度可能不同，这里没算。没算进去的：兼职收入、借出去的钱、信用卡和花呗、月中追加。</li>
+        <li>全部以「分」为单位做整数计算。默认金额和开销是虚构示例。</li>
+      </ul>
+    </details>
+  </section>
+  <p class="muted">全部在你的浏览器里算，不联网；设定自动存在本机。</p>
+</div>
+<script src="./core.js"></script>
+<script src="./ui.js"></script>
+</body>
+</html>
